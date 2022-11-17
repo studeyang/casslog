@@ -1,0 +1,21 @@
+debug: false
+server:
+  port: 30002
+encrypt.failOnError: false
+
+spring:
+  application:
+    name: casslog-example-springboot2
+
+management:
+  port: 40002
+  contextPath: /hellgate
+  security.enabled: false
+
+server.tomcat.accesslog.enabled: true
+
+logging:
+  level:
+    root: info
+    com.github: info
+    com.github.open.xx.ExampleController: warn

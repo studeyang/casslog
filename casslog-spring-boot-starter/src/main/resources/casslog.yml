@@ -1,0 +1,36 @@
+Configuration:
+  status: warn
+
+  Properties:
+    Property:
+      - name: log.filename
+        value: casslog
+
+  Appenders:
+    Console:
+      name: Console
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: "${sys:CONSOLE_PATTERN}"
+    RollingFile:
+      - name: ROLLING_FILE
+        ignoreExceptions: false
+        fileName: logs/${sys:log.filename}.log
+        filePattern: "logs/$${date:yyyy-MM}/${sys:log.filename}-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS} %5level %t %traceId [%c{1.}:%4line] - %m%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+            modulate: true
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 1000
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: Console
+        - ref: ROLLING_FILE
+
