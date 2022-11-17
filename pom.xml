@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.github.studeyang</groupId>
+    <artifactId>casslog</artifactId>
+    <version>1.4.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <!--日志工具类-->
+        <module>casslog-core</module>
+        <module>casslog-spring-boot-starter</module>
+    </modules>
+
+    <properties>
+        <project.build.jdk>1.8</project.build.jdk>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-boot1.version>1.4.2.RELEASE</spring-boot1.version>
+        <spring-boot2.version>2.3.9.RELEASE</spring-boot2.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <log4j2.version>2.17.0</log4j2.version>
+    </properties>
+
+    <dependencies>
+        <!--base-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.4</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>${project.build.jdk}</source>
+                    <target>${project.build.jdk}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

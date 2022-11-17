@@ -1,0 +1,47 @@
+{
+  "groups": [
+    {
+      "name": "casslog",
+      "type": "com.github.open.casslog.autoconfigure.PrepareCassLogLoggingApplicationListener"
+    }
+  ],
+  "properties": [
+    {
+      "name": "casslog.level",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "设置 logger 日志级别.",
+      "sourceType": "com.github.open.casslog.level.LoggingLevelSetter"
+    }
+  ],
+  "hints": [
+    {
+      "name": "casslog.level.keys",
+      "values": [
+        {
+          "value": "root",
+          "description": "Root logger used to assign the default logging level."
+        }
+      ],
+      "providers": [
+        {
+          "name": "logger-name"
+        }
+      ]
+    },
+    {
+      "name": "casslog.level.values",
+      "values": [
+        {"value": "trace"},
+        {"value": "debug"},
+        {"value": "info"},
+        {"value": "warn"},
+        {"value": "error"}
+      ],
+      "providers": [
+        {
+          "name": "any"
+        }
+      ]
+    }
+  ]
+}

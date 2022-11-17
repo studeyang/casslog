@@ -1,0 +1,30 @@
+debug: false
+server:
+  port: 30001
+encrypt.failOnError: false
+spring:
+  application:
+    name: casslog-example-springboot1
+
+nacos:
+  config:
+    namespace: alpha
+    group: infra
+
+management:
+  port: 40001
+  contextPath: /hellgate
+  security.enabled: false
+
+server.tomcat.accesslog.enabled: true
+
+#casslog:
+#  level:
+#    root: info
+#    com.github.open.xx.ExampleController: warn
+#    com.dbses.DbsesLogger: error
+#
+#logging:
+#  level:
+#    root: info
+#    com.github.open.xx.ExampleController: info
