@@ -1,11 +1,11 @@
 package com.github.open.casslog.level;
 
 import com.alibaba.nacos.api.config.annotation.NacosConfigListener;
-import com.github.open.cassconfig.MultiProfilesYamlConfigParseSupport;
-import com.google.common.collect.Maps;
+import io.github.open.config.support.MultiProfilesYamlConfigParseSupport;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,7 +24,7 @@ public class DynamicLoggingLevelListener extends StaticLoggingLevelListener {
     public void casslogLevelChange(String newLog) {
 
         Map<String, Object> properties = new MultiProfilesYamlConfigParseSupport().parse(newLog);
-        Map<String, String> casslogLevelMap = Maps.newHashMap();
+        Map<String, String> casslogLevelMap = new HashMap<>();
 
         for (Object object : properties.keySet()) {
             String propertyName = String.valueOf(object);

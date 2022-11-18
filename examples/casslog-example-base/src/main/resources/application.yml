@@ -1,0 +1,11 @@
+debug: false
+server:
+  port: 30001
+spring:
+  application:
+    name: casslog-example-base
+
+casslog:
+  accessLogEnabled: true
+  level:
+    com.github.open.casslog.example.WebApplication: warn

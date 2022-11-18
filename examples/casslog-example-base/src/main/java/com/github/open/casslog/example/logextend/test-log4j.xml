@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN">
+    <Appenders>
+
+        <!-- 想在控制台打印，请保留此段 -->
+        <Console name="Console" target="SYSTEM_OUT" follow="false">
+            <PatternLayout pattern="${sys:CONSOLE_PATTERN}" />
+        </Console>
+
+        <!-- casslog 扩展日志 -->
+        <RollingFile name="TEST_EXTEND_LOG" fileName="logs/test-extend.log"
+                     filePattern="logs/$${date:yyyy-MM}/access-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} [%c{1.}:%4line] - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="256MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1000"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO"/>
+        <Logger name="com.github.open" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="TEST_EXTEND_LOG"/>
+        </Logger>
+    </Loggers>
+</Configuration>

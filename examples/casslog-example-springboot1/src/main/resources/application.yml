@@ -1,0 +1,12 @@
+debug: false
+server:
+  port: 30003
+spring:
+  application:
+    name: casslog-example-springboot1
+
+nacos:
+  config:
+    server-addr: http://ec-nacos.studeyang.com
+    namespace: alpha
+    group: infra
