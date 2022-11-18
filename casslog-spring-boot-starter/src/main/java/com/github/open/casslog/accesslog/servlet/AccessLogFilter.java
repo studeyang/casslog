@@ -15,8 +15,7 @@ import java.io.IOException;
 @Order(Ordered.LOWEST_PRECEDENCE - 5)
 public class AccessLogFilter extends GenericFilterBean {
 
-
-    private ServletAccessLogBuilder builder = new ServletAccessLogBuilder();
+    private final ServletAccessLogBuilder builder = new ServletAccessLogBuilder();
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {

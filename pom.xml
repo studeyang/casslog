@@ -10,6 +10,7 @@
         <!--日志工具类-->
         <module>casslog-core</module>
         <module>casslog-spring-boot-starter</module>
+        <module>nacos-config-spring-boot-starter</module>
     </modules>
 
     <properties>

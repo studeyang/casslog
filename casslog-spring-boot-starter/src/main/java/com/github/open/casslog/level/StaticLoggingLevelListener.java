@@ -1,6 +1,5 @@
 package com.github.open.casslog.level;
 
-import com.google.common.collect.Maps;
 import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +9,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.env.PropertySource;
 import org.springframework.web.context.ConfigurableWebEnvironment;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -36,7 +36,7 @@ public class StaticLoggingLevelListener implements InitializingBean, Environment
     }
 
     private void setLoggingLevel(ConfigurableWebEnvironment environment) {
-        Map<String, String> casslogLevelMap = Maps.newHashMap();
+        Map<String, String> casslogLevelMap = new HashMap<>();
         for (PropertySource<?> propertySource : environment.getPropertySources()) {
             initCasslogLevelMap(propertySource, casslogLevelMap);
         }

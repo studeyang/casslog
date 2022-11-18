@@ -1,15 +1,14 @@
 package com.github.open.casslog.accesslog;
 
-import com.google.common.collect.Lists;
 import org.springframework.util.AntPathMatcher;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class PathMatcherUtil {
 
     private static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
-    private static final List<String> IGNORED_PATTERN = Lists.newArrayList(
-            "/actuator/**", "/hellgate/**");
+    private static final List<String> IGNORED_PATTERN = Arrays.asList("/actuator/**", "/hellgate/**");
 
     private PathMatcherUtil() {
 

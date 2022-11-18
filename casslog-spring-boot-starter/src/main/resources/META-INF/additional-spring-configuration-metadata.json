@@ -11,6 +11,12 @@
       "type": "java.util.Map<java.lang.String,java.lang.String>",
       "description": "设置 logger 日志级别.",
       "sourceType": "com.github.open.casslog.level.LoggingLevelSetter"
+    },
+    {
+      "name": "casslog.accessLogEnabled",
+      "type": "java.lang.Boolean",
+      "description": "访问日志开关.",
+      "sourceType": "com.github.open.casslog.autoconfigure.AccessLogAutoConfiguration"
     }
   ],
   "hints": [

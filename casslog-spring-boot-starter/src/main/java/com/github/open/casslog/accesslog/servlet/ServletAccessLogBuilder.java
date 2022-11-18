@@ -1,9 +1,6 @@
 package com.github.open.casslog.accesslog.servlet;
 
-import com.github.commons.context.IcecAccessInfoContext;
-import com.github.commons.web.AccessInfo;
-import com.github.open.casslog.accesslog.AccessLogConstants;
-import com.github.open.scloud.commons.AccessLog;
+import com.github.open.casslog.accesslog.AccessLog;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.StringUtils;
 
@@ -14,7 +11,7 @@ import java.util.Map;
 public class ServletAccessLogBuilder {
 
     public AccessLog build(HttpServletRequest request, HttpServletResponse response, long start) {
-        AccessLog accessLog = new AccessLog(getAccessId(request));
+        AccessLog accessLog = new AccessLog();
 
         accessLog.setRequestMethod(request.getMethod());
         accessLog.setRequestUri(getRequestURI(request));
@@ -30,20 +27,9 @@ public class ServletAccessLogBuilder {
         accessLog.setTokenExpiresIn("");
         accessLog.setActualServerId("");
 
-        accessLog.setLatency((int)(System.currentTimeMillis() - start));
+        accessLog.setLatency((int) (System.currentTimeMillis() - start));
 
         return accessLog;
-    }
-
-    private String getAccessId(HttpServletRequest request) {
-        String accessId = "";
-        AccessInfo accessInfo = IcecAccessInfoContext.getCurrentContext().getAccessInfo();
-        if (null != accessInfo) {
-            accessId = accessInfo.getAccessId();
-        } else if (null != request.getHeader(AccessLogConstants.ATTR_ACCESS_ID)) {
-            accessId = request.getHeader(AccessLogConstants.ATTR_ACCESS_ID);
-        }
-        return accessId;
     }
 
     private String getRequestURI(HttpServletRequest request) {
@@ -69,7 +55,7 @@ public class ServletAccessLogBuilder {
                 null);
 
         if (null != uriVariables) {
-            for (Map.Entry<String, String> entry: uriVariables.entrySet()) {
+            for (Map.Entry<String, String> entry : uriVariables.entrySet()) {
                 if (StringUtils.hasText(queryString)) {
                     queryString = entry.getKey() + "=" + entry.getValue() + "&" + queryString;
                 } else {
@@ -84,7 +70,7 @@ public class ServletAccessLogBuilder {
 
     private <T> T getRequestAttribute(HttpServletRequest request, String attrName, T defaultValue) {
         if (null != request.getAttribute(attrName)) {
-            return (T)request.getAttribute(attrName);
+            return (T) request.getAttribute(attrName);
         } else {
             return defaultValue;
         }
