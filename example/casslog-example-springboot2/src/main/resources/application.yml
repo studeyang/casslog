@@ -8,6 +8,6 @@ spring:
 
 nacos:
   config:
-    server-addr: http://ec-nacos.studeyang.com
+    server-addr: http://127.0.0.1:8443
     namespace: alpha
     group: infra
