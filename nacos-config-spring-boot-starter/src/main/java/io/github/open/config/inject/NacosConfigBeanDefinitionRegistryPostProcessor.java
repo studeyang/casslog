@@ -33,7 +33,7 @@ public class NacosConfigBeanDefinitionRegistryPostProcessor implements BeanDefin
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 
         Map<String, Object> globalPropertiesAttributes = getAnnotationAttributes();
-        if (null == globalPropertiesAttributes || getAnnotationAttributes().isEmpty()) {
+        if (null == globalPropertiesAttributes || globalPropertiesAttributes.isEmpty()) {
             return;
         }
 
