@@ -4,7 +4,7 @@
 
 第二，各司其职。减少业务团队对基础日志技术的学习成本，使其专注于业务迭代；
 
-第三，技术演进。抽象出日志组件，统一做日志的配置和升级。主要原因也是 2021-12-10 日发生的`Log4j2`的版本漏洞。[漏洞回顾]()
+第三，技术演进。抽象出日志组件，统一做日志的配置和升级。主要原因也是 2021-12-10 日发生的`Log4j2`的版本漏洞。[漏洞回顾](docs/Apache%20Log4j2远程代码执行漏洞.md)
 
 # 功能简介
 
@@ -18,27 +18,7 @@
 
 ![image-20221119174517686](https://technotes.oss-cn-shenzhen.aliyuncs.com/2022/image-20221119174517686.png)
 
-### 功能二：（动态）修改日志级别
-
-```yaml
-logging:
-  level:
-    com.github.open.casslog.example.ExampleController: warn
-    com.studeyang.OtherLogger: error
-```
-
-或
-
-```yaml
-casslog:
-  level:
-    com.github.open.casslog.example.ExampleController: warn
-    com.studeyang.OtherLogger: error
-```
-
-动态修改日志级别需使用`Nacos Config`，并将`casslog.level`段配置移动`Nacos`。可参考示例工程：[casslog-example-nacos](example/casslog-example-nacos)
-
-### 功能三：扩展日志配置
+### 功能二：扩展日志配置
 
 第一，配置要扩展的日志：
 
@@ -89,7 +69,41 @@ public class TestLogExtend extends AbstractLogExtend {
 }
 ```
 
-可参考示例工程：[casslog-example-base](example/casslog-example-base)
+> 详情可参考这篇文章：[实战：如何优雅地扩展Log4j配置？](https://mp.weixin.qq.com/s/FMdvXFzthXPsjqFpL9xAbg)
+>
+> 示例工程：[casslog-example-base](example/casslog-example-base)
+
+### 功能三：（动态）修改日志级别
+
+修改日志级别可使用下面配置。
+
+```yaml
+logging:
+  level:
+    com.github.open.casslog.example.ExampleController: warn
+    com.studeyang.OtherLogger: error
+```
+
+或
+
+```yaml
+casslog:
+  level:
+    com.github.open.casslog.example.ExampleController: warn
+    com.studeyang.OtherLogger: error
+```
+
+- `casslog.level.root`：表示设置应用 Root Logger 的日志级别。
+- `casslog.level.com.studeyang`：表示设置`com.studeyang`包下的所有类的日志级别。
+- `casslog.level.com.studeyang.OtherLogger`：表示设置`com.studeyang.OtherLogger`类的日志级别。
+
+> 需要注意的是：logging.level 的加载在 casslog.level 之前。加载顺序为：logging.level > log extend > casslog.level。
+
+动态修改日志级别需使用`Nacos`配置中心，并将`casslog.level`段配置移动`Nacos`。
+
+详情步骤可参考：[动态修改日志级别](docs/动态修改日志级别.md)。
+
+示例工程：[casslog-example-nacos](example/casslog-example-nacos)。
 
 ### 功能四：打印 Skywalking traceId
 
@@ -99,7 +113,7 @@ public class TestLogExtend extends AbstractLogExtend {
 
 ![image-20221119175918888](https://technotes.oss-cn-shenzhen.aliyuncs.com/2022/image-20221119175918888.png)
 
-如果是异步线程，请留意日志中是否打印了 traceId。解决方法见。
+如果是异步线程，请留意日志中是否打印了 traceId。解决方法见：[Skywalking跨线程追踪](docs/Skywalking跨线程追踪.md)。
 
 ### 功能五：低版本检测
 
@@ -107,5 +121,31 @@ Casslog 对低于 2.16.0 log4j 版本会进行检测。
 
 ![image-20221119180508766](https://technotes.oss-cn-shenzhen.aliyuncs.com/2022/image-20221119180508766.png)
 
+# 快速使用
 
+### 引入依赖
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>io.github.studeyang</groupId>
+        <artifactId>casslog-spring-boot-starter</artifactId>
+    </dependency>
+</dependencies>
+```
+
+### 启动应用
+
+```java
+@SpringBootApplication
+public class WebApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(WebApplication.class, args);
+    }
+}
+```
+
+启动后效果如下图所示：
+
+![image-20221121140626130](https://technotes.oss-cn-shenzhen.aliyuncs.com/2022/image-20221121140626130.png)
 
