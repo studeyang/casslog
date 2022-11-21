@@ -12,7 +12,7 @@ import org.springframework.core.Ordered;
 
 /**
  * @author <a href="https://github.com/studeyang">studeyang</a>
- * @date 2021/10/21
+ * @since 1.0.0
  */
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)

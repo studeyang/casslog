@@ -25,14 +25,11 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 /**
- * yaml multi profiles.
- * <p>
- * read nacos propertysource:
- * <p>
- * 1. AbstractNacosPropertySourceBuilder#doBuild(String, BeanDefinition, Map)<br/>
- * 2. NacosPropertySource#NacosPropertySource(String, String, String, String, String)<br/>
- * 3. com.alibaba.nacos.spring.util.NacosUtils#toProperties(String, String, String, String)<br/>
- * 4. com.alibaba.nacos.spring.util.ConfigParseUtils#toProperties(String, String, String, String)<br/>
+ * <p>yaml multi profiles. read nacos propertysource:</p>
+ * <p>1. AbstractNacosPropertySourceBuilder#doBuild(String, BeanDefinition, Map)</p>
+ * <p>2. NacosPropertySource#NacosPropertySource(String, String, String, String, String)</p>
+ * <p>3. com.alibaba.nacos.spring.util.NacosUtils#toProperties(String, String, String, String)</p>
+ * <p>4. com.alibaba.nacos.spring.util.ConfigParseUtils#toProperties(String, String, String, String)</p>
  *
  * @author <a href="https://github.com/studeyang">studeyang</a>
  */

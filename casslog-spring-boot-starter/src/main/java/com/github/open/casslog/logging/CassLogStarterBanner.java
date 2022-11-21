@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  * @author <a href="https://github.com/studeyang">studeyang</a>
- * @date 2021/10/15
+ * @since 1.0.0
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CassLogStarterBanner {

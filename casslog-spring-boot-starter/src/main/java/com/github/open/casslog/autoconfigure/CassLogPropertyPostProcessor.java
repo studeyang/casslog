@@ -10,7 +10,7 @@ import java.util.UUID;
 
 /**
  * @author <a href="https://github.com/studeyang">studeyang</a>
- * @date 2021/12/23
+ * @since 1.0.0
  */
 @Slf4j
 @ConditionalOnBean(PrepareCassLogLoggingApplicationListener.class)
