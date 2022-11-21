@@ -4,7 +4,7 @@ import org.springframework.boot.logging.log4j2.Log4J2LoggingSystem;
 
 /**
  * @author <a href="https://github.com/studeyang">studeyang</a>
- * @date 2021/10/22
+ * @since 1.0.0
  */
 public class CassLoggingSystem extends Log4J2LoggingSystem {
 
