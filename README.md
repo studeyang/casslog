@@ -20,6 +20,8 @@
 
 ### 功能二：扩展日志配置
 
+casslog 日志组件不仅提供了统一的日志配置，还支持配置扩展。例如：我想把服务的所有 API 访问日志记录到 access.log 文件里，可以通过以下步骤实现。
+
 第一，配置要扩展的日志：
 
 ```xml
@@ -32,7 +34,7 @@
         </Console>
  
         <!-- casslog 扩展日志 -->
-        <RollingFile name="TEST_EXTEND_LOG" fileName="logs/test-extend.log"
+        <RollingFile name="ACCESS_LOG" fileName="logs/access.log"
                      filePattern="logs/$${date:yyyy-MM}/access-%d{yyyy-MM-dd}-%i.log.gz">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} [%c{1.}:%4line] - %m%n</Pattern>
@@ -49,7 +51,7 @@
         <Root level="INFO"/>
         <Logger name="com.casstime.open.xx.ExampleController" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="TEST_EXTEND_LOG"/>
+            <AppenderRef ref="ACCESS_LOG"/>
         </Logger>
     </Loggers>
 </Configuration>
@@ -64,7 +66,7 @@ package com.github.open.casslog.example.logextend;
 public class TestLogExtend extends AbstractLogExtend {
     @Override
     public String logConfig() {
-        return "classpath:com/github/open/casslog/example/logextend/test-log4j.xml";
+        return "classpath:com/github/open/casslog/example/logextend/access-log4j.xml";
     }
 }
 ```
@@ -93,13 +95,13 @@ casslog:
     com.studeyang.OtherLogger: error
 ```
 
-- `casslog.level.root`：表示设置应用 Root Logger 的日志级别。
-- `casslog.level.com.studeyang`：表示设置`com.studeyang`包下的所有类的日志级别。
-- `casslog.level.com.studeyang.OtherLogger`：表示设置`com.studeyang.OtherLogger`类的日志级别。
+- `casslog.level.root`：表示应用 Root Logger 的日志级别。
+- `casslog.level.com.studeyang`：表示`com.studeyang`包下的所有类的日志级别。
+- `casslog.level.com.studeyang.OtherLogger`：表示`com.studeyang.OtherLogger`类的日志级别。
 
 > 需要注意的是：logging.level 的加载在 casslog.level 之前。加载顺序为：logging.level > log extend > casslog.level。
 
-动态修改日志级别需使用`Nacos`配置中心，并将`casslog.level`段配置移动`Nacos`。
+动态修改日志级别需使用`Nacos`配置中心。
 
 详情步骤可参考：[动态修改日志级别](docs/动态修改日志级别.md)。
 
